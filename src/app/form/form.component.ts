@@ -20,6 +20,7 @@ export class FormComponent implements OnInit {
   details: FormGroup;
   user: string;
   msg: string;
+  form = true;
 
   constructor(
     private keralaservice: KeralafundsserviceService,
@@ -57,20 +58,32 @@ export class FormComponent implements OnInit {
       .subscribe((accept: boolean) => {
         if (accept) {
           // DO SOMETHING
-          console.log(
-            `Make serveice here and store in table${amount} by ${
-              this.keralaservice.user.name
-            }`
-          );
           const postdetails: Detail = {
             id: this.keralaservice.user.name,
             name: this.keralaservice.user.name,
             amount: amount
           };
-          console.log(postdetails);
-          this.keralaservice
-            .postamount(postdetails)
-            .subscribe(result => console.log(result));
+          this.keralaservice.postamount(postdetails).subscribe(
+            result => {
+              if (result === 201) {
+                this.msg =
+                  'Your submission has be updated thanks for submission. A mail will be sent to you';
+              }
+              if (result === 501) {
+                this.msg =
+                  'Some error has been occured please try again or contact us';
+              }
+              this.form = false;
+            },
+            error => {
+              console.log('got it');
+              if (error.status === 501) {
+                this.msg =
+                  'Some error has been occured please try again or contact us';
+              }
+              this.form = false;
+            }
+          );
         } else {
           // DO SOMETHING ELSE
           console.log('DO nothing');

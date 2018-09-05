@@ -32,12 +32,11 @@ export class KeralafundsserviceService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
+      // console.error(error); // log to console instead
+      result = error.status;
       // TODO: better job of transforming error for user consumption
-
       // Let the app keep running by returning an empty result.
-      console.log(result as T);
+      // console.log(result as T);
       return of(result as T);
     };
   }
