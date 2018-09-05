@@ -37,6 +37,7 @@
     "highlight.js": "9.10.0",
     "node-sspi": "^0.2.3",
     "node-teradata": "^1.5.0",
+    "nodejs-nodemailer-outlook": "^1.0.8",
     "npm": "^6.4.0",
     "reinstall": "^2.0.0",
     "rxjs": "^6.0.0",
