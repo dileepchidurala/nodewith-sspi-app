@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Detail } from './postdetails';
 
 @Injectable({
   providedIn: 'root'
@@ -9,25 +10,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class KeralafundsserviceService {
   private url = 'http://153.65.41.154:3000/';
   public user: any = 'mock user';
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) {}
-  // getuser(): Observable<any> {
-  //   return this.http
-  //     .get<any>(this.url)
-  //     .pipe(tap(heroes => console.log(heroes)));
-  // }
-  // getuser() {
-  //   return this.http.get(this.url).pipe(
-  //     map(result => {
-  //       this.user = result;
-  //     })
-  //   );
-  // }
+
   getuser(): Observable<any> {
-    return this.http
-      .get(this.url + 'user', { withCredentials: true })
-      .pipe(catchError(this.handleError('getuser', [])));
+    return this.http.get(this.url + 'user', { withCredentials: true }).pipe(
+      map(result => (this.user = result)),
+      catchError(this.handleError('getuser', []))
+    );
   }
+
+  postamount(details: Detail): Observable<any> {
+    return this.http
+      .post(this.url + 'api/contribute', details, this.httpOptions)
+      .pipe(catchError(this.handleError<Detail>('postamount')));
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure

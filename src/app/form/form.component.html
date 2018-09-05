@@ -1,0 +1,17 @@
+<form class="form" [formGroup]="details" (ngSubmit)="Submit(details.value)">
+  {{msg}}
+  <mat-form-field>
+    <input matInput placeholder="Amount to contribute" type="text" pattern="[0-9]*" name="Amount" [formControl]="details.controls['amount']"
+      formControlName="amount">
+  </mat-form-field>
+
+  <div *ngIf="!details.valid">
+    <p style="color: red">*Only Integral values are accpeted</p>
+    <button mat-raised-button color color="warn" type="submit" value="Submit" [disabled]="!details.valid">Contribute</button>
+    <!-- <input type="submit" class="cta-btn filled" value="Submit" [disabled]="!details.valid" class="button-off"> -->
+  </div>
+  <div *ngIf="details.valid">
+    <button mat-raised-button color color="primary" type="submit" value="Submit" [disabled]="!details.valid">Contribute</button>
+    <!-- <input type="submit" class="cta-btn filled" value="Submit" [disabled]="!details.valid" class="button-on"> -->
+  </div>
+</form>
