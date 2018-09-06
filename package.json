@@ -35,6 +35,7 @@
     "d3": "^4.9.0",
     "hammerjs": "^2.0.8",
     "highlight.js": "9.10.0",
+    "log-to-file": "^1.2.2",
     "node-sspi": "^0.2.3",
     "node-teradata": "^1.5.0",
     "nodejs-nodemailer-outlook": "^1.0.8",

@@ -8,7 +8,7 @@ import { Detail } from './postdetails';
   providedIn: 'root'
 })
 export class KeralafundsserviceService {
-  private url = 'http://153.65.41.154:3000/';
+  private url = 'http://172.16.117.245:3000/';
   public user: any = 'mock user';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
