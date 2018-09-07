@@ -4,13 +4,15 @@
 <button>click me to test</button> -->
 
 <td-layout>
-  <td-navigation-drawer flex sidenavTitle="Covalent" logo="teradata" name={{user}} email={{user}}@teradata.com>
+  <td-navigation-drawer flex sidenavTitle="Covalent" logo="teradata" name={{user}} email={{email}}>
     <!-- <mat-nav-list>
     <a *ngFor="let item of routes" mat-list-item><mat-icon>{{item.icon}}</mat-icon>{{item.title}}</a>
   </mat-nav-list> -->
     <div td-navigation-drawer-menu>
       <mat-nav-list>
-        <a *ngFor="let item of usermenu" mat-list-item><mat-icon>{{item.icon}}</mat-icon>{{item.title}}</a>
+        <a *ngFor="let item of usermenu" mat-list-item>
+          <mat-icon>{{item.icon}}</mat-icon>{{item.title}}
+        </a>
       </mat-nav-list>
     </div>
   </td-navigation-drawer>
@@ -26,12 +28,22 @@
       <a mat-icon-button matTooltip="Github" href="https://github.com/teradata/covalent" target="_blank"><mat-icon svgIcon="assets:github"></mat-icon></a> -->
     </div>
     <img src="..\assets\keralafloods.jpg" alt="image" style="width:100%">
-    <td-layout-card-over color="accent" cardWidth="75">
-
+    <td-layout-card-over color="accent" cardWidth="50">
       <mat-card-title>Contrubute to kerala</mat-card-title>
       <mat-card-subtitle>Hi {{user}},Donate for kerala</mat-card-subtitle>
       <mat-card-content>
-        <app-form></app-form>
+        <h1 *ngIf="check === undefined">{{loding}}</h1>
+        <div *ngIf="user===undefined">
+          <p>Please login</p>
+        </div>
+        <div *ngIf="check">
+          <div *ngIf="user">
+            <app-form></app-form>
+          </div>
+        </div>
+        <div *ngIf="check===false">
+          <h3>You had already submitted. For any further queries contact us.</h3>
+        </div>
       </mat-card-content>
     </td-layout-card-over>
   </td-layout-nav>

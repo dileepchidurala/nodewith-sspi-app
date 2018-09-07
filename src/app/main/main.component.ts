@@ -8,13 +8,30 @@ import { KeralafundsserviceService } from '../keralafundsservice.service';
 })
 export class MainComponent implements OnInit {
   user: any;
+  email: string;
+  check: boolean;
+  loding: String = 'Loading ...';
   constructor(public service: KeralafundsserviceService) {}
 
   ngOnInit() {
     this.getuser();
   }
+  validate() {
+    this.service.validate().subscribe(result => {
+      this.loding = '';
+      console.log(this.check);
+      if (result === 405) {
+        this.check = false;
+      } else {
+        this.check = true;
+      }
+    });
+  }
   getuser() {
-    console.log('testing');
-    this.service.getuser().subscribe(result => (this.user = result.name));
+    this.service.getuser().subscribe(result => {
+      this.user = result.name.substring(3);
+      this.email = this.user + '@teradata.com';
+      this.validate();
+    });
   }
 }

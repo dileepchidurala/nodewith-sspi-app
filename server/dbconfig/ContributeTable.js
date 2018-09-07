@@ -17,4 +17,4 @@ var config = {
 var teradata = new Teradata(config);
 
 module.exports.teradata = teradata;
-module.exports.db_name = 'covalent.keralacontribution';
+module.exports.db_name = 'covalent.keralacontributionprod';

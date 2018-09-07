@@ -10,6 +10,7 @@ import {
   Validators,
   FormControl
 } from '@angular/forms';
+import { validateConfig } from '@angular/router/src/config';
 
 @Component({
   selector: 'app-form',
@@ -33,7 +34,12 @@ export class FormComponent implements OnInit {
     this.details = this.fb.group({
       amount: [
         ,
-        Validators.compose([Validators.required, Validators.pattern('[0-9]*')])
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('[0-9]*'),
+          Validators.minLength(1),
+          Validators.min(1)
+        ])
       ]
     });
   }
@@ -59,7 +65,7 @@ export class FormComponent implements OnInit {
         if (accept) {
           // DO SOMETHING
           const postdetails: Detail = {
-            id: this.keralaservice.user.name,
+            id: this.keralaservice.user.name.substring(3),
             name: this.keralaservice.user.name,
             amount: amount
           };

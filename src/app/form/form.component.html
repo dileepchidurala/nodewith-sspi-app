@@ -7,7 +7,7 @@
     </mat-form-field>
 
     <div *ngIf="!details.valid">
-      <p style="color: red">*Only Integral values are accpeted</p>
+      <p style="color: red">*Only Positive Integral values are accpeted</p>
       <button mat-raised-button color color="warn" type="submit" value="Submit" [disabled]="!details.valid">Contribute</button>
       <!-- <input type="submit" class="cta-btn filled" value="Submit" [disabled]="!details.valid" class="button-off"> -->
     </div>

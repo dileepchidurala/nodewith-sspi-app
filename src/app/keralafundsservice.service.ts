@@ -23,6 +23,13 @@ export class KeralafundsserviceService {
     );
   }
 
+  validate() {
+    const id = this.user.name.substring(3);
+    return this.http
+      .get(`${this.url}api/validate/?id=${id}`)
+      .pipe(catchError(this.handleError('validate')));
+  }
+
   postamount(details: Detail): Observable<any> {
     return this.http
       .post(this.url + 'api/contribute', details, this.httpOptions)
