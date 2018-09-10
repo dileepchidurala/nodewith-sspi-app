@@ -2,7 +2,7 @@
   <form class="form" [formGroup]="details" (ngSubmit)="Submit(details.value)">
     {{msg}}
     <mat-form-field>
-      <input matInput placeholder="Amount to contribute" type="text" pattern="[0-9]*" name="Amount" [formControl]="details.controls['amount']"
+      <input matInput placeholder="Amount to contribute" type="number" pattern="^[0-9]*$" name="Amount" [formControl]="details.controls['amount']"
         formControlName="amount">
     </mat-form-field>
 
