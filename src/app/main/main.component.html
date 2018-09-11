@@ -4,7 +4,7 @@
 <button>click me to test</button> -->
 
 <td-layout>
-  <td-navigation-drawer flex sidenavTitle="Covalent" logo="teradata" name={{user}} email={{email}}>
+  <td-navigation-drawer flex sidenavTitle="Covalent" logo="teradata" name={{name}} email={{email}}>
     <!-- <mat-nav-list>
     <a *ngFor="let item of routes" mat-list-item><mat-icon>{{item.icon}}</mat-icon>{{item.title}}</a>
   </mat-nav-list> -->
@@ -29,8 +29,8 @@
     </div>
     <img src="..\assets\keralafloods.jpg" alt="image" style="width:100%">
     <td-layout-card-over color="accent" cardWidth="50">
-      <mat-card-title>Contrubute to kerala</mat-card-title>
-      <mat-card-subtitle>Hi {{name}},Donate for kerala</mat-card-subtitle>
+      <mat-card-title>Contribute to kerala</mat-card-title>
+      <mat-card-subtitle>Hi <b>{{name}}</b>,Donate for kerala</mat-card-subtitle>
       <mat-card-content>
         <h1 *ngIf="check === undefined">{{loding}}</h1>
         <div *ngIf="user===undefined">

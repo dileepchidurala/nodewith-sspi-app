@@ -20,7 +20,6 @@ export class MainComponent implements OnInit {
   validate() {
     this.service.validate().subscribe(result => {
       this.loding = '';
-      console.log(this.check);
       if (result === 405) {
         this.check = false;
       } else {

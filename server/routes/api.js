@@ -19,7 +19,6 @@ router.get('/fullname/', (req, res) => {
   db.teradata
     .read(query)
     .then(response => {
-      console.log(response);
       res.send(JSON.stringify(response));
     })
     .catch(error => console.log(error));
@@ -74,7 +73,7 @@ router.post('/contribute', (req, res) => {
           port: 25,
           from: details.id,
           to: userid + '@teradata.com',
-          subject: `Hey thank you for conributing to kerala fund and amount you are conributing is ${
+          subject: `Hey thank you for contributing to kerala fund and amount you are contribution is ${
             req.body.amount
           }. For any changes contact us`,
           html: '<b>This is bold text</b>',
