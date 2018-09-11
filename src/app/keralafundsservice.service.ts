@@ -10,6 +10,7 @@ import { Detail } from './postdetails';
 export class KeralafundsserviceService {
   private url = 'http://172.16.117.245:3000/';
   public user: any = 'mock user';
+  public fullname: any;
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -20,6 +21,14 @@ export class KeralafundsserviceService {
     return this.http.get(this.url + 'user', { withCredentials: true }).pipe(
       map(result => (this.user = result)),
       catchError(this.handleError('getuser', []))
+    );
+  }
+
+  getfullname() {
+    const id = this.user.name.substring(3).toUpperCase();
+    return this.http.get(`${this.url}api/fullname/?id=${id}`).pipe(
+      map(result => (this.fullname = result)),
+      catchError(this.handleError('validate'))
     );
   }
 

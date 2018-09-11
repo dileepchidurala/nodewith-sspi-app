@@ -18,3 +18,4 @@ var teradata = new Teradata(config);
 
 module.exports.teradata = teradata;
 module.exports.db_name = 'covalent.keralacontributionprod';
+module.exports.usertable = 'covalent.UserInfo';

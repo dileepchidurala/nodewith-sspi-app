@@ -8,6 +8,7 @@ import { KeralafundsserviceService } from '../keralafundsservice.service';
 })
 export class MainComponent implements OnInit {
   user: any;
+  name: any;
   email: string;
   check: boolean;
   loding: String = 'Loading ...';
@@ -32,6 +33,12 @@ export class MainComponent implements OnInit {
       this.user = result.name.substring(3);
       this.email = this.user + '@teradata.com';
       this.validate();
+      this.getfullname();
+    });
+  }
+  getfullname() {
+    this.service.getfullname().subscribe(result => {
+      this.name = result[0].Full_Name;
     });
   }
 }

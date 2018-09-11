@@ -167,7 +167,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"form\">\n  <form class=\"form\" [formGroup]=\"details\" (ngSubmit)=\"Submit(details.value)\">\n    {{msg}}\n    <mat-form-field>\n      <input matInput placeholder=\"Amount to contribute\" type=\"number\" pattern=\"[0-9]*\" name=\"Amount\" [formControl]=\"details.controls['amount']\"\n        formControlName=\"amount\">\n    </mat-form-field>\n\n    <div *ngIf=\"!details.valid\">\n      <p style=\"color: red\">*Only Positive Integral values are accpeted</p>\n      <button mat-raised-button color color=\"warn\" type=\"submit\" value=\"Submit\" [disabled]=\"!details.valid\">Contribute</button>\n      <!-- <input type=\"submit\" class=\"cta-btn filled\" value=\"Submit\" [disabled]=\"!details.valid\" class=\"button-off\"> -->\n    </div>\n    <div *ngIf=\"details.valid\">\n      <button mat-raised-button color color=\"primary\" type=\"submit\" value=\"Submit\" [disabled]=\"!details.valid\">Contribute</button>\n      <!-- <input type=\"submit\" class=\"cta-btn filled\" value=\"Submit\" [disabled]=\"!details.valid\" class=\"button-on\"> -->\n    </div>\n  </form>\n</div>\n<div *ngIf=\"form===false\">\n  {{msg}}\n</div>"
+module.exports = "<div *ngIf=\"form\">\n  <form class=\"form\" [formGroup]=\"details\" (ngSubmit)=\"Submit(details.value)\">\n    {{msg}}\n    <mat-form-field>\n      <input matInput placeholder=\"Amount to contribute\" type=\"number\" pattern=\"^[0-9]*$\" name=\"Amount\" [formControl]=\"details.controls['amount']\"\n        formControlName=\"amount\">\n    </mat-form-field>\n\n    <div *ngIf=\"!details.valid\">\n      <p style=\"color: red\">*Only Positive Integral values are accpeted</p>\n      <button mat-raised-button color color=\"warn\" type=\"submit\" value=\"Submit\" [disabled]=\"!details.valid\">Contribute</button>\n      <!-- <input type=\"submit\" class=\"cta-btn filled\" value=\"Submit\" [disabled]=\"!details.valid\" class=\"button-off\"> -->\n    </div>\n    <div *ngIf=\"details.valid\">\n      <button mat-raised-button color color=\"primary\" type=\"submit\" value=\"Submit\" [disabled]=\"!details.valid\">Contribute</button>\n      <!-- <input type=\"submit\" class=\"cta-btn filled\" value=\"Submit\" [disabled]=\"!details.valid\" class=\"button-on\"> -->\n    </div>\n  </form>\n</div>\n<div *ngIf=\"form===false\">\n  {{msg}}\n</div>"
 
 /***/ }),
 
@@ -328,6 +328,11 @@ var KeralafundsserviceService = /** @class */ (function () {
         var _this = this;
         return this.http.get(this.url + 'user', { withCredentials: true }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (result) { return (_this.user = result); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError('getuser', [])));
     };
+    KeralafundsserviceService.prototype.getfullname = function () {
+        var _this = this;
+        var id = this.user.name.substring(3).toUpperCase();
+        return this.http.get(this.url + "api/fullname/?id=" + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (result) { return (_this.fullname = result); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError('validate')));
+    };
     KeralafundsserviceService.prototype.validate = function () {
         var id = this.user.name.substring(3);
         return this.http
@@ -382,7 +387,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\n  Hai {{user}}\n</p>\n<button>click me to test</button> -->\n\n<td-layout>\n  <td-navigation-drawer flex sidenavTitle=\"Covalent\" logo=\"teradata\" name={{user}} email={{email}}>\n    <!-- <mat-nav-list>\n    <a *ngFor=\"let item of routes\" mat-list-item><mat-icon>{{item.icon}}</mat-icon>{{item.title}}</a>\n  </mat-nav-list> -->\n    <div td-navigation-drawer-menu>\n      <mat-nav-list>\n        <a *ngFor=\"let item of usermenu\" mat-list-item>\n          <mat-icon>{{item.icon}}</mat-icon>{{item.title}}\n        </a>\n      </mat-nav-list>\n    </div>\n  </td-navigation-drawer>\n  <td-layout-nav color=\"accent\">\n    <div td-toolbar-content layout=\"row\" layout-align=\"start center\" flex>\n      <button mat-icon-button td-menu-button tdLayoutToggle>\n        <mat-icon>menu</mat-icon>\n      </button>\n      <mat-icon class=\"mat-icon-logo cursor-pointer\" svgIcon=\"teradata\"></mat-icon>\n      <!-- <span class=\"cursor-pointer\">Covalent</span> -->\n      <span flex></span>\n      <!-- <a mat-icon-button matTooltip=\"Docs\" href=\"https://teradata.github.io/covalent/\" target=\"_blank\"><mat-icon>chrome_reader_mode</mat-icon></a>\n      <a mat-icon-button matTooltip=\"Github\" href=\"https://github.com/teradata/covalent\" target=\"_blank\"><mat-icon svgIcon=\"assets:github\"></mat-icon></a> -->\n    </div>\n    <img src=\"..\\assets\\keralafloods.jpg\" alt=\"image\" style=\"width:100%\">\n    <td-layout-card-over color=\"accent\" cardWidth=\"50\">\n      <mat-card-title>Contrubute to kerala</mat-card-title>\n      <mat-card-subtitle>Hi {{user}},Donate for kerala</mat-card-subtitle>\n      <mat-card-content>\n        <h1 *ngIf=\"check === undefined\">{{loding}}</h1>\n        <div *ngIf=\"user===undefined\">\n          <p>Please login</p>\n        </div>\n        <div *ngIf=\"check\">\n          <div *ngIf=\"user\">\n            <app-form></app-form>\n          </div>\n        </div>\n        <div *ngIf=\"check===false\">\n          <h3>You had already submitted. For any further queries contact us.</h3>\n        </div>\n      </mat-card-content>\n    </td-layout-card-over>\n  </td-layout-nav>\n</td-layout>"
+module.exports = "<!-- <p>\n  Hai {{user}}\n</p>\n<button>click me to test</button> -->\n\n<td-layout>\n  <td-navigation-drawer flex sidenavTitle=\"Covalent\" logo=\"teradata\" name={{user}} email={{email}}>\n    <!-- <mat-nav-list>\n    <a *ngFor=\"let item of routes\" mat-list-item><mat-icon>{{item.icon}}</mat-icon>{{item.title}}</a>\n  </mat-nav-list> -->\n    <div td-navigation-drawer-menu>\n      <mat-nav-list>\n        <a *ngFor=\"let item of usermenu\" mat-list-item>\n          <mat-icon>{{item.icon}}</mat-icon>{{item.title}}\n        </a>\n      </mat-nav-list>\n    </div>\n  </td-navigation-drawer>\n  <td-layout-nav color=\"accent\">\n    <div td-toolbar-content layout=\"row\" layout-align=\"start center\" flex>\n      <button mat-icon-button td-menu-button tdLayoutToggle>\n        <mat-icon>menu</mat-icon>\n      </button>\n      <mat-icon class=\"mat-icon-logo cursor-pointer\" svgIcon=\"teradata\"></mat-icon>\n      <!-- <span class=\"cursor-pointer\">Covalent</span> -->\n      <span flex></span>\n      <!-- <a mat-icon-button matTooltip=\"Docs\" href=\"https://teradata.github.io/covalent/\" target=\"_blank\"><mat-icon>chrome_reader_mode</mat-icon></a>\n      <a mat-icon-button matTooltip=\"Github\" href=\"https://github.com/teradata/covalent\" target=\"_blank\"><mat-icon svgIcon=\"assets:github\"></mat-icon></a> -->\n    </div>\n    <img src=\"..\\assets\\keralafloods.jpg\" alt=\"image\" style=\"width:100%\">\n    <td-layout-card-over color=\"accent\" cardWidth=\"50\">\n      <mat-card-title>Contrubute to kerala</mat-card-title>\n      <mat-card-subtitle>Hi {{name}},Donate for kerala</mat-card-subtitle>\n      <mat-card-content>\n        <h1 *ngIf=\"check === undefined\">{{loding}}</h1>\n        <div *ngIf=\"user===undefined\">\n          <p>Please login</p>\n        </div>\n        <div *ngIf=\"check\">\n          <div *ngIf=\"user\">\n            <app-form></app-form>\n          </div>\n        </div>\n        <div *ngIf=\"check===false\">\n          <h3>You had already submitted. For any further queries contact us.</h3>\n        </div>\n      </mat-card-content>\n    </td-layout-card-over>\n  </td-layout-nav>\n</td-layout>"
 
 /***/ }),
 
@@ -436,6 +441,13 @@ var MainComponent = /** @class */ (function () {
             _this.user = result.name.substring(3);
             _this.email = _this.user + '@teradata.com';
             _this.validate();
+            _this.getfullname();
+        });
+    };
+    MainComponent.prototype.getfullname = function () {
+        var _this = this;
+        this.service.getfullname().subscribe(function (result) {
+            _this.name = result[0].Full_Name;
         });
     };
     MainComponent = __decorate([

@@ -12,6 +12,19 @@ var d = new Date();
 d.setTimezone('IST', true);
 d.getTimezone();
 
+router.get('/fullname/', (req, res) => {
+  var query = `select full_name from ${db.usertable} where qlid='${
+    req.query.id
+  }'`;
+  db.teradata
+    .read(query)
+    .then(response => {
+      console.log(response);
+      res.send(JSON.stringify(response));
+    })
+    .catch(error => console.log(error));
+});
+
 router.get('/validate/', (req, res) => {
   var query = `select * from ${db.db_name} where userid = '${req.query.id}'`;
   db.teradata.read(query).then(response => {
