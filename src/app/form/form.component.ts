@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { KeralafundsserviceService } from '../keralafundsservice.service';
 import { ViewContainerRef } from '@angular/core';
 import { TdDialogService } from '@covalent/core/dialogs';
@@ -19,9 +19,12 @@ import { validateConfig } from '@angular/router/src/config';
 })
 export class FormComponent implements OnInit {
   details: FormGroup;
-  user: string;
   msg: string;
   form = true;
+  @Input('userId')
+  userId;
+  @Input('fullname')
+  fullname: string;
 
   constructor(
     private keralaservice: KeralafundsserviceService,
@@ -31,6 +34,7 @@ export class FormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.userId, this.fullname);
     this.details = this.fb.group({
       amount: [
         ,
@@ -65,8 +69,8 @@ export class FormComponent implements OnInit {
         if (accept) {
           // DO SOMETHING
           const postdetails: Detail = {
-            id: this.keralaservice.user.name.substring(3),
-            name: this.keralaservice.fullname,
+            id: this.userId,
+            name: this.fullname,
             amount: amount
           };
           this.keralaservice.postamount(postdetails).subscribe(

@@ -53,6 +53,7 @@ router.post('/contribute', (req, res) => {
     req.body.id
   }',
   '${req.body.name}',${req.body.amount});`;
+  console.log(query);
   db.teradata
     .write(query)
     .then(response => {

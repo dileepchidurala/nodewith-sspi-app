@@ -18,7 +18,7 @@ export class MainComponent implements OnInit {
     this.getuser();
   }
   validate() {
-    this.service.validate().subscribe(result => {
+    this.service.validate(this.user).subscribe(result => {
       this.loding = '';
       if (result === 405) {
         this.check = false;
@@ -29,15 +29,15 @@ export class MainComponent implements OnInit {
   }
   getuser() {
     this.service.getuser().subscribe(result => {
-      this.user = result.name.substring(3);
+      this.user = result.name.substring(3).toUpperCase();
       this.email = this.user + '@teradata.com';
-      this.validate();
       this.getfullname();
     });
   }
   getfullname() {
-    this.service.getfullname().subscribe(result => {
-      this.name = result;
+    this.service.getfullname(this.user).subscribe(result => {
+      this.name = result[0].Full_Name;
+      this.validate();
     });
   }
 }

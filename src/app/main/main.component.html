@@ -1,20 +1,15 @@
-<!-- <p>
-  Hai {{user}}
-</p>
-<button>click me to test</button> -->
-
 <td-layout>
   <td-navigation-drawer flex sidenavTitle="Covalent" logo="teradata" name={{name}} email={{email}}>
     <!-- <mat-nav-list>
     <a *ngFor="let item of routes" mat-list-item><mat-icon>{{item.icon}}</mat-icon>{{item.title}}</a>
   </mat-nav-list> -->
-    <div td-navigation-drawer-menu>
+    <!-- <div td-navigation-drawer-menu>
       <mat-nav-list>
         <a *ngFor="let item of usermenu" mat-list-item>
           <mat-icon>{{item.icon}}</mat-icon>{{item.title}}
         </a>
       </mat-nav-list>
-    </div>
+    </div> -->
   </td-navigation-drawer>
   <td-layout-nav color="accent">
     <div td-toolbar-content layout="row" layout-align="start center" flex>
@@ -38,7 +33,7 @@
         </div>
         <div *ngIf="check">
           <div *ngIf="user">
-            <app-form></app-form>
+            <app-form [userId]="user" [fullname]="name"></app-form>
           </div>
         </div>
         <div *ngIf="check===false">

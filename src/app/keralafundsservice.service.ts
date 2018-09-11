@@ -9,8 +9,6 @@ import { Detail } from './postdetails';
 })
 export class KeralafundsserviceService {
   private url = 'http://172.16.117.245:3000/';
-  public user: any = 'mock user';
-  public fullname: any;
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -18,24 +16,20 @@ export class KeralafundsserviceService {
   constructor(private http: HttpClient) {}
 
   getuser(): Observable<any> {
-    return this.http.get(this.url + 'user', { withCredentials: true }).pipe(
-      map(result => (this.user = result)),
-      catchError(this.handleError('getuser', []))
-    );
-  }
-
-  getfullname() {
-    const id = this.user.name.substring(3).toUpperCase();
-    return this.http.get(`${this.url}api/fullname/?id=${id}`).pipe(
-      map(result => (this.fullname = result[0].Full_Name)),
-      catchError(this.handleError('validate'))
-    );
-  }
-
-  validate() {
-    const id = this.user.name.substring(3);
     return this.http
-      .get(`${this.url}api/validate/?id=${id}`)
+      .get(this.url + 'user', { withCredentials: true })
+      .pipe(catchError(this.handleError('getuser', [])));
+  }
+
+  getfullname(userId: string) {
+    return this.http
+      .get(`${this.url}api/fullname/?id=${userId}`)
+      .pipe(catchError(this.handleError('validate')));
+  }
+
+  validate(userId: string) {
+    return this.http
+      .get(`${this.url}api/validate/?id=${userId}`)
       .pipe(catchError(this.handleError('validate')));
   }
 
