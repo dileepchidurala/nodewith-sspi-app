@@ -2,11 +2,12 @@ var express = require('express'),
   router = express.Router(),
   db = require('../dbconfig/ContributeTable'),
   time = require('time')(Date),
-  outlook = require('../logindetails'),
-  nodeoutlook = require('nodejs-nodemailer-outlook'),
-  log = require('log-to-file');
+  // outlook = require('../logindetails'),
+  // nodeoutlook = require('nodejs-nodemailer-outlook'),
+  log = require('log-to-file'),
+  mail = require('../mailling/outllokmail');
 
-const details = new outlook();
+// const details = new outlook();
 
 var d = new Date();
 d.setTimezone('IST', true);
@@ -53,7 +54,6 @@ router.post('/contribute', (req, res) => {
     req.body.id
   }',
   '${req.body.name}',${req.body.amount});`;
-  console.log(query);
   db.teradata
     .write(query)
     .then(response => {
@@ -64,22 +64,23 @@ router.post('/contribute', (req, res) => {
         './server/logs/7formSubmitOk.txt'
       );
       try {
-        const userid = req.body.id; // .substring(3);
-        nodeoutlook.sendEmail({
-          auth: {
-            user: details.id,
-            pass: details.passowrd
-          },
-          host: 'outlook.td.teradata.com',
-          port: 25,
-          from: details.id,
-          to: userid + '@teradata.com',
-          subject: `Hey thank you for contributing to kerala fund and amount you are contribution is ${
-            req.body.amount
-          }. For any changes contact us`,
-          html: '<b>This is bold text</b>',
-          text: 'This is text version!'
-        });
+        const userid = req.body.id;
+        mail.mailfunction(userid, req.body.amount);
+        // nodeoutlook.sendEmail({
+        //   auth: {
+        //     user: details.id,
+        //     pass: details.passowrd
+        //   },
+        //   host: 'outlook.td.teradata.com',
+        //   port: 25,
+        //   from: details.id,
+        //   to: userid + '@teradata.com',
+        //   subject: `Hey thank you for contributing to kerala fund and amount you are contribution is ${
+        //     req.body.amount
+        //   }. For any changes contact us`,
+        //   html: '<b>This is bold text</b>',
+        //   text: 'This is text version!'
+        // });
       } catch (err) {
         log(
           `${req.body.id} has tried contributed ${

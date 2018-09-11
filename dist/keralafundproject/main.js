@@ -208,7 +208,6 @@ var FormComponent = /** @class */ (function () {
         this.form = true;
     }
     FormComponent.prototype.ngOnInit = function () {
-        console.log(this.userId, this.fullname);
         this.details = this.fb.group({
             amount: [
                 ,

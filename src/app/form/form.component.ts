@@ -34,7 +34,6 @@ export class FormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.userId, this.fullname);
     this.details = this.fb.group({
       amount: [
         ,
