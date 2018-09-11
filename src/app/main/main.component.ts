@@ -38,7 +38,7 @@ export class MainComponent implements OnInit {
   }
   getfullname() {
     this.service.getfullname().subscribe(result => {
-      this.name = result[0].Full_Name;
+      this.name = result;
     });
   }
 }

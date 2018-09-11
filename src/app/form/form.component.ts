@@ -66,7 +66,7 @@ export class FormComponent implements OnInit {
           // DO SOMETHING
           const postdetails: Detail = {
             id: this.keralaservice.user.name.substring(3),
-            name: this.keralaservice.user.name,
+            name: this.keralaservice.fullname,
             amount: amount
           };
           this.keralaservice.postamount(postdetails).subscribe(
@@ -82,7 +82,6 @@ export class FormComponent implements OnInit {
               this.form = false;
             },
             error => {
-              console.log('got it');
               if (error.status === 501) {
                 this.msg =
                   'Some error has been occured please try again or contact us';

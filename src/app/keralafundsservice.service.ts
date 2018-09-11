@@ -27,7 +27,7 @@ export class KeralafundsserviceService {
   getfullname() {
     const id = this.user.name.substring(3).toUpperCase();
     return this.http.get(`${this.url}api/fullname/?id=${id}`).pipe(
-      map(result => (this.fullname = result)),
+      map(result => (this.fullname = result[0].Full_Name)),
       catchError(this.handleError('validate'))
     );
   }

@@ -242,7 +242,7 @@ var FormComponent = /** @class */ (function () {
                 // DO SOMETHING
                 var postdetails = {
                     id: _this.keralaservice.user.name.substring(3),
-                    name: _this.keralaservice.user.name,
+                    name: _this.keralaservice.fullname,
                     amount: amount
                 };
                 _this.keralaservice.postamount(postdetails).subscribe(function (result) {
@@ -256,7 +256,6 @@ var FormComponent = /** @class */ (function () {
                     }
                     _this.form = false;
                 }, function (error) {
-                    console.log('got it');
                     if (error.status === 501) {
                         _this.msg =
                             'Some error has been occured please try again or contact us';
@@ -331,7 +330,7 @@ var KeralafundsserviceService = /** @class */ (function () {
     KeralafundsserviceService.prototype.getfullname = function () {
         var _this = this;
         var id = this.user.name.substring(3).toUpperCase();
-        return this.http.get(this.url + "api/fullname/?id=" + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (result) { return (_this.fullname = result); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError('validate')));
+        return this.http.get(this.url + "api/fullname/?id=" + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (result) { return (_this.fullname = result[0].Full_Name); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.handleError('validate')));
     };
     KeralafundsserviceService.prototype.validate = function () {
         var id = this.user.name.substring(3);
@@ -447,7 +446,7 @@ var MainComponent = /** @class */ (function () {
     MainComponent.prototype.getfullname = function () {
         var _this = this;
         this.service.getfullname().subscribe(function (result) {
-            _this.name = result[0].Full_Name;
+            _this.name = result;
         });
     };
     MainComponent = __decorate([
