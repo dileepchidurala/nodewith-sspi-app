@@ -1,7 +1,7 @@
 class outlookdetails {
   constructor() {
     this.id = 'dileep.chidurala@teradata.com';
-    this.passowrd = 'assert@Pc9';
+    this.passowrd = 'assert@Td9';
   }
 }
 module.exports = outlookdetails;

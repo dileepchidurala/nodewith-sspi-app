@@ -20,13 +20,13 @@ app.use(
     credentials: true
   })
 );
-app.use('/', (req, res, next) => {
-  log(
-    `Got a request at ${d.getFullYear()}/${d.getMonth()}/${d.getDate()} :${d.getHours()} :${d.getMinutes()} :${d.getSeconds()}`,
-    './server/logs/1allrequests.txt'
-  );
-  next();
-});
+// app.use('/', (req, res, next) => {
+//   log(
+//     `Got a request at ${d.getFullYear()}/${d.getMonth()}/${d.getDate()} :${d.getHours()} :${d.getMinutes()} :${d.getSeconds()}`,
+//     './server/logs/1allrequests.txt'
+//   );
+//   next();
+// });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -47,10 +47,6 @@ app.use('/user', function(req, res, next) {
 app.use('/user', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify({ name: req.connection.user }));
-  log(
-    `Got error while fetching user ${req.connection.user} is not successful`,
-    './server/logs/2getUserErr.txt'
-  );
 });
 
 app.use('/api', api);

@@ -156,7 +156,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "/* For Firefox */\r\ninput[type='number'] {\r\n    -moz-appearance:textfield;\r\n}\r\n/* Webkit browsers like Safari and Chrome */\r\ninput[type=number]::-webkit-inner-spin-button,\r\ninput[type=number]::-webkit-outer-spin-button {\r\n    -webkit-appearance: none;\r\n    margin: 0;\r\n}"
 
 /***/ }),
 
